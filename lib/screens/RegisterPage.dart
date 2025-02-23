@@ -1,3 +1,4 @@
+import 'package:chit_chat/screens/HomePage.dart';
 import 'package:chit_chat/services/authservices.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
       isLoading = false;
     });
     if(user!=null){
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomePage()),)
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomePage()),);
     }
 
   }
