@@ -7,21 +7,42 @@ import 'package:flutter/material.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  bool isLoggedin = await AuthService().isLoggedIn();
 
-  runApp( MyApp(isLoggedin:isLoggedin ));
+  runApp( MyApp( ));
 }
 
-class MyApp extends StatelessWidget {
-  final bool isLoggedin;
-  const MyApp({super.key, required this.isLoggedin});
+class MyApp extends StatefulWidget {
 
+  const MyApp({super.key,});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  bool? isLoggedIn;
+  @override
+  void initState() {
+    super.initState();
+    _checkAuthStatus();
+  }
+  Future<void> _checkAuthStatus() async {
+    bool loggedIn = await AuthService().isLoggedIn();
+    setState(() {
+      isLoggedIn = loggedIn;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ChitChat',
-        home:isLoggedin?HomePage():RegisterPage(),
+        home:isLoggedIn==null?
+        Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ):(isLoggedIn!?HomePage():RegisterPage()),
       theme: lightMode,
 
     );
