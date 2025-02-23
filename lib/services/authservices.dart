@@ -89,6 +89,7 @@ class AuthService{
       }
       else{
         print('Login failed:${res.body}');
+        return null;
       }
 
     }
