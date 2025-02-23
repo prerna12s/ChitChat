@@ -1,6 +1,6 @@
 # chit_chat
 
-A new Flutter project.
+A Chat Application that has special features 
 
 ## Getting Started
 
